@@ -30,7 +30,6 @@ end
 
 if __FILE__ == $0
   DBBackup::PostgreSQL.new(
-    user: ENV['PSQL_USER'],
     destination: ENV['BACKUP_PATH']
   ).backup
 end

@@ -4,15 +4,11 @@ require_relative 'psql'
 require_relative 'mysql'
 
 BACKUP_PATH = ENV['BACKUP_PATH'] || Dir.pwd
-PSQL_USER = ENV['PSQL_USER'] || "postgres"
-MYSQL_USER = ENV['MYSQL_USER'] || "root"
 
 DBBackup::PostgreSQL.new(
-  user: PSQL_USER,
   destination: BACKUP_PATH
 ).backup
 
 DBBackup::MySQL.new(
-  user: MYSQL_USER,
   destination: BACKUP_PATH
 ).backup
