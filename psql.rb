@@ -6,14 +6,12 @@ class DBBackup::PostgreSQL < DBBackup::Base
 
   ignore_databases %w(template0 template1)
 
-  command :prefix, -> (opts) {
-    %{sudo -u #{opts[:user]}} }
   command :list_dbs, -> (opts) {
-    %{#{commands[:prefix].(opts)} psql postgres --tuples-only --command="\\\\list"} }
+    %{psql postgres --tuples-only --command="\\\\list"} }
   command :dump_db, -> (opts) {
-    %{#{commands[:prefix].(opts)} pg_dump #{opts[:db]} > #{opts[:file]}} }
+    %{pg_dump #{opts[:db]} > #{opts[:file]}} }
   command :dump_cluster, -> (opts) {
-    %{#{commands[:prefix].(opts)} pg_dumpall > #{opts[:file]}} }
+    %{pg_dumpall > #{opts[:file]}} }
 
   def databases
     @databases ||= fetch_databases
